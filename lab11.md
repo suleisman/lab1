@@ -113,69 +113,60 @@ int main() {
 #include <stdio.h>
 #include <stdlib.h>
 
-enum State{
+enum State {
     INSIDE,
     OUTSIDE
 };
 
-int main()
-{
-    enum State state=INSIDE;
+int f();
+
+int main(void) {
+    printf("%d\n", f());
+    return 0;
+}
+
+int f() {
+    enum State state = INSIDE;
     char c;
    
-int i=0;
+    int i = 0;
 
-int  sum=0;
-int a=0;
-int b=0;
+    int sum = 0;
+    int a = 0;
+    int b = 0;
    
-for(char c=getchar();c!='\n';c=getchar())
-{
-    if(c!=' ')
-    {
-        int p_1=c-48;
-
-       
-        sum=sum+p_1;
-    
-     
-    }
-    else
-       { switch (state) {
-            case INSIDE:
-                 if(c==' ') {
-        
-                            a=sum;
-       
-                             sum=0;
-                            state=OUTSIDE;
-                            break;
-                }
-            case OUTSIDE:
-                if(c==' ') {
-        
-                    b=sum;
-       
-                    sum=0;
-                    state=INSIDE;
-                    break;
-                }
-        
+    for(char c = getchar();c!=EOF;c = getchar()) {
+        if(c!=' ') {
+            int p_1 = c - 48;
+            sum = sum + p_1;
         }
-   
-}
-    
-}
+        else { 
+            switch (state) {
+                case INSIDE:
+                     if(c == ' ') {
+                        a = sum;
+                        sum = 0;
+                        state = OUTSIDE;
+                        break;
+                     }
+                case OUTSIDE:
+                    if(c == ' ') {
+        
+                        b = sum;
+                        sum = 0;
+                        state = INSIDE;
+                        break;
+                    }
+            }
+        }
+    }
 
-if(state==OUTSIDE)
-{
-    printf("%d", a);
-}
-else
-{
-    printf("%d", b);
-}
-    return 0;
+    if(state==OUTSIDE) {
+        return a;
+    }
+    else {
+        return  b;
+    }
 }
 ```
 
