@@ -174,23 +174,23 @@ int f() {
 #include <stdio.h>
 #include <stdlib.h>
 
+struct A{
+ int x;
+ int y;
+};
+
+
 enum State {
     INSIDE,
     OUTSIDE
 };
 
-int f_1();
-int f_2();
 
-int main(void) {
-    printf("%d ",f_1());
-    printf("%d ",f_2());
-    return 0;
-}
-
-int f_1() {
+struct A f() {
+    
+    struct A d;
     enum State state = INSIDE;
-    char c;
+   
    
     int i = 0;
 
@@ -232,24 +232,30 @@ int f_1() {
     }
 
     if(state==OUTSIDE) {
-        return now_a;
-        int F(int d) {
-            
+        d.x = now_a;
+        d.y=a;    
         
             
-          }
-        }
-       
-    }
+    } 
     else {
-        return  now_b;
-       
-    }
-}
-
-int f_2(int e, int d) {
+        d.x=now_b;
+        d.y=b;
     
-    e=a;
+    }
+       return d;
+    }
+    
+
+
+
+
+
+
+int main(int argc, char **argv)
+{
+    struct A ans=f();
+    printf("%d %d", ans.x, ans.y);
+    return 0;
 }
 
 ```
