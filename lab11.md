@@ -1,58 +1,105 @@
 ```
 #include <stdio.h>
+#include <stdlib.h>
 
-int main()
-{
-    
-    char c;
-    int n=0;
-    int v[n];
+enum State {
+    INSIDE,
+    OUTSIDE
+};
+enum PRIS {
+    Y,
+    N
+};
 
-int i=0;
+int f();
 
-int  sum=0;
-int a=0;
-int b=0;
-   
-for(char c=getchar();c!='\n';c=getchar())
-{
-    if(c!=' ')
-    {
-        int p_1=c-48;
-
-       
-        sum=sum+p_1;
-    
-     
-    }
-    else
-    {if(c==' '&&(i%2==0))
-    {
-        
-        a=sum;
-       
-        sum=0;
-        i++;
-    }else{ if(c==' '&&(i%2!=0))
-    {
-        
-        b=sum;
-       
-        sum=0;
-        i++;
-    }}}
-   
-}
-
-if(i%2==1)
-{
-    printf("%d", a);
-}
-else
-{
-    printf("%d", b);
-}
+int main(void) {
+    printf("%d\n", f());
     return 0;
+}
+
+int f() {
+    enum State state = INSIDE;
+   enum PRIS pris =Y;
+   
+    int i = 0;
+
+    int sum = 0;
+    int a = 0;
+    int b = 0;
+   
+    for(char c = getchar(); c !='\n';c = getchar()) {
+        if(c!=' ') {
+            if(c>47&&c<58) {
+               int p_1 = c - 48;
+               sum = sum + p_1;
+               }
+            else if(c!=32)
+            {
+                pris= N;
+                sum=0;
+
+            }    
+               
+        }
+        else if(pris==Y)  { 
+            switch (state) {
+                case INSIDE:
+                     if((c == ' ')||(c == '\n')) {
+                        a = sum;
+                        
+                        sum = 0;
+                        state = OUTSIDE;
+                        printf("a=%d st=%d\n", a,state);
+                       
+                        break;
+                     }
+                case OUTSIDE:
+                    if((c == ' ')||(c == '\n')) {
+        
+                        b = sum;
+                        sum = 0;
+                        state = INSIDE;
+                        printf("b=%d st=%d\n", b,state);
+                        break;
+                    }
+            }
+        }
+        else{sum=0;pris=Y; }
+        
+    
+    }
+    
+    printf("sum=%d\n", sum);
+if(sum>0) {
+    switch (state)
+    {
+    case INSIDE:
+    a = sum;
+    sum = 0;
+    state = OUTSIDE;
+    break;
+    case OUTSIDE:
+    b = sum;
+    sum = 0;
+    state = INSIDE;
+    break;
+    
+}   
+   
+}
+
+    if(state==INSIDE) {
+        
+        return a;
+        
+    }
+    else {
+        
+        return  b;
+        
+    }
+  
 }
 
 ```
