@@ -11,7 +11,7 @@ int f_1();
 
 
 int main(void) {
-    printf("%d ",f_1());
+    f_1();
 
     return 0;
 }
@@ -28,6 +28,8 @@ int f_1() {
     int now_2=0;
    
    for(char c=getchar() ;c!='\n'; c=getchar()) {
+      
+      if(c!=' ') {
        switch (state) {
            case INSIDE:
                 now_1=c-48;
@@ -37,25 +39,41 @@ int f_1() {
                 break;
             case OUTSIDE:
                 now_2=c-48;
-                sum=sum*10+now_1;
-                now=now + now_1;
+                sum=sum*10+now_2;
+                now=now + now_2;
                 if(now<10) {
                     sum=sum*10+now;
+                    printf("%d",sum);
                     now=0;
+                    sum=0;
                 } else {
+                    printf("%d",sum);
                     now=0;
+                    sum=0;
                 }
                 state= INSIDE;
                 break;
                 
                 
-                
+       }
+       }
+       else
+       {if(sum>0)
+        {printf("%d",sum); state =INSIDE;}
+        printf(" ");
+        sum=0;
+        now=0;
+        
        }
        
        
    }
-   return sum;
+   if(sum>0)
+   {
+    printf("%d",sum);
+   }
+       
+   
     
 }
-
 ```
