@@ -26,51 +26,63 @@ int f_1() {
     int now=0;
     int now_1=0;
     int now_2=0;
-   
-   for(char c=getchar() ;c!='\n'; c=getchar()) {
+   int flag=0;
+    for(char c=getchar() ;c!='\n'; c=getchar()) {
       
-      if(c!=' ') {
-       switch (state) {
-           case INSIDE:
-                now_1=c-48;
-                sum=sum*10+now_1;
-                now=now + now_1;
-                state=OUTSIDE;
-                break;
-            case OUTSIDE:
-                now_2=c-48;
-                sum=sum*10+now_2;
-                now=now + now_2;
-                if(now<10) {
-                    sum=sum*10+now;
-                    printf("%d",sum);
-                    now=0;
-                    sum=0;
-                } else {
-                    printf("%d",sum);
-                    now=0;
-                    sum=0;
-                }
-                state= INSIDE;
-                break;
+        if(c!=' ') {
+            switch (state) {
+                case INSIDE:
+                    now_1=c-'0';
+                    if(c=='0')
+                    {flag=1;}
+                    sum=sum*10+now_1;
+                    now=now + now_1;
+                    state=OUTSIDE;
+                    break;
+                case OUTSIDE:
+                    now_2=c-'0';
+                    if(c=='0')
+                    {flag=1;}
+                    sum=sum*10+now_2;
+                    now=now + now_2;
+                    if(now<10) {
+                        sum=sum*10+now;
+                        printf("%d",sum);
+                        now=0;
+                        sum=0;
+                        flag=0;
+                    } else {
+                        printf("%d",sum);
+                        now=0;
+                        sum=0;
+                        flag=0;
+                      }
+                    state= INSIDE;
+                    break;
                 
                 
-       }
-       }
-       else
-       {if(sum>0)
-        {printf("%d",sum); state =INSIDE;}
-        printf(" ");
-        sum=0;
-        now=0;
+            }
+       } else { 
+            if(sum>0) { 
+                printf("%d",sum); state =INSIDE;
+            }
+            else if(sum==0&&flag==1)
+            { 
+                printf("%d",sum); state =INSIDE;
+            }
+            
+            printf(" ");
+            sum=0;
+            now=0;
         
-       }
+         }
        
        
    }
-   if(sum>0)
-   {
-    printf("%d",sum);
+   if(sum>0) {
+        printf("%d",sum);
+   } else if(sum==0&&flag==1) {
+        printf("%d",sum);   
    }
        
    
