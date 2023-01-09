@@ -176,3 +176,12 @@ bool similar_consonants () {
     }  
     return 0;
 }
+
+
+serafim@serafim-VirtualBox:~/programs$ gcc -Wall test.c -g -lm -o a.out
+serafim@serafim-VirtualBox:~/programs$ ./a.out <  test.txt
+   1.8756174
+serafim@serafim-VirtualBox:~/programs$ 
+
+
+
